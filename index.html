@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Protocollo Quantico Zener - Pratica SRI</title>
+    <title>Protocollo di Coscienza Quantistica - Pratica Zener SRI</title>
     <meta name="theme-color" content="#0f172a">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
@@ -12,7 +12,7 @@
     
     <style>
         :root {
-            /* Palette Super Professional (Laboratorio/Intelligence) */
+            /* Super Professional Palette (Laboratory/Intelligence) */
             --bg-app: #e2e8f0;          
             --bg-paper: #ffffff;        
             --text-main: #0f172a;       
@@ -69,10 +69,10 @@
         }
         .brand-subtitle {
             font-family: var(--font-mono);
-            font-size: clamp(0.65rem, 2vw, 0.9rem);
+            font-size: clamp(0.75rem, 2vw, 1rem);
             color: var(--brand-accent);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             margin-bottom: 3.5rem;
             text-align: center;
             font-weight: 700;
@@ -142,7 +142,6 @@
         }
         #app-container.active { display: block; }
 
-        /* Toolbar / Pannello di Controllo Intuitivo */
         #toolbar {
             position: fixed; top: 0; left: 0; right: 0;
             background: #0f172a; 
@@ -224,14 +223,13 @@
             }
         }
 
-        .doc-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -0.02em;}
+        .doc-title { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -0.02em;}
         .section-header { 
             font-weight: 700; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);
             color: var(--text-main); border-bottom: 2px solid var(--text-main); 
             padding-bottom: 4px; margin: 2rem 0 1rem 0; letter-spacing: 0.05em; 
         }
         
-        /* Form Inputs */
         .input-group { position: relative; margin-bottom: 1rem; }
         .input-label { display: block; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.05em;}
         
@@ -280,7 +278,7 @@
             backdrop-filter: blur(4px); border: 1px solid var(--border-light);
         }
         .tool-btn { 
-            font-size: 0.6rem; padding: 4px 6px; background: transparent; 
+            font-size: 0.65rem; padding: 4px 8px; background: transparent; 
             border: 1px solid transparent; border-radius: 2px; cursor: pointer; 
             color: var(--text-muted); font-weight: 700; font-family: var(--font-mono); transition: all 0.2s;
         }
@@ -293,7 +291,30 @@
         .matrix-card:hover { transform: translateY(-3px); }
         .matrix-card.selected { transform: translateY(-3px); }
 
-        /* REGOLE DI STAMPA KDP PERFETTE - NESSUNA MASCHERA VISIBILE */
+        .print-bleed-page {
+            padding: 0 !important;
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0;
+            background: white !important;
+            page-break-after: auto;
+        }
+        
+        .cutout-card {
+            border-right: 1px dashed #cbd5e1;
+            border-bottom: 1px dashed #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: white;
+            min-height: 99mm; 
+        }
+        .cutout-card:nth-child(2n) { border-right: none; }
+        .cutout-card:nth-last-child(-n+2) { border-bottom: none; }
+
         @media print {
             @page { size: A4 portrait; margin: 0 !important; }
             body, html { 
@@ -303,95 +324,70 @@
                 color: black !important; 
             }
             
-            /* Nasconde forzatamente tutto l'UI dell'App */
             #toolbar, .canvas-tools, #sys-modal, #dialog-modal, .view-screen { display: none !important; }
             #app-container { display: block !important; padding: 0 !important; margin: 0 !important; }
             
-            /* Foglio A4 Rigoroso con margini di 20mm */
             .a4-page { 
-                box-shadow: none !important; 
-                margin: 0 !important; 
+                box-shadow: none !important; margin: 0 !important; 
                 border: none !important; border-radius: 0 !important;
-                page-break-after: always; break-after: page; 
-                width: 210mm !important; 
-                height: 297mm !important; 
-                max-height: 297mm !important;
-                padding: 20mm !important; 
-                box-sizing: border-box !important; 
-                display: flex !important; flex-direction: column !important;
-                overflow: hidden !important;
-                background: white !important;
-                position: relative !important;
             }
-            
             .a4-page:last-of-type { 
                 page-break-after: auto !important; 
                 break-after: auto !important; 
             }
             
-            input::placeholder, textarea::placeholder { color: transparent !important; }
+            .print-bleed-page {
+                padding: 0 !important; 
+                width: 210mm !important; height: 297mm !important;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                grid-template-rows: repeat(3, 1fr) !important;
+            }
+            .cutout-card {
+                border-color: #94a3b8 !important; 
+                width: 100% !important;
+                height: 99mm !important;
+                box-sizing: border-box !important;
+            }
             
+            input::placeholder, textarea::placeholder { color: transparent !important; }
             input[type="text"], textarea { 
-                border: none !important; 
-                border-bottom: 1px dotted #000 !important; 
-                border-radius: 0 !important; 
-                box-shadow: none !important; 
-                background: transparent !important; 
-                color: black !important; 
-                padding: 2px 0 !important; 
-                font-size: 10pt !important;
-                resize: none !important;
+                border: none !important; border-bottom: 1px dotted #000 !important; border-radius: 0 !important; 
+                box-shadow: none !important; background: transparent !important; color: black !important; 
+                padding: 2px 0 !important; font-size: 10pt !important; resize: none !important;
             }
             
             .bg-slate-50, .bg-red-50, .bg-blue-50, .bg-blue-100, .bg-slate-100, .bg-red-50\/50, .bg-slate-50\/50 { 
-                background: transparent !important; 
-                border: 1px solid #000 !important; 
-                color: black !important; 
+                background: transparent !important; border: 1px solid #000 !important; color: black !important; 
             }
             .text-blue-700, .text-blue-800, .text-blue-900, .text-red-700, .text-red-800, .text-red-900, .text-slate-500, .text-slate-600 { color: black !important; }
             .border-slate-200, .border-slate-300, .border-red-200, .border-red-300, .border-red-400, .border-blue-100, .border-blue-200, .border-dashed { border-color: #000 !important; border-style: solid !important; border-width: 1px !important; }
             
             .chk-box { 
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; 
-                border: 1px solid #000 !important; 
-                border-radius: 0 !important; 
-                background: white !important;
+                border: 1px solid #000 !important; border-radius: 0 !important; background: white !important;
             }
             .chk-wrap input:checked + .chk-box { background: #000 !important; border-color: #000 !important; }
             .chk-wrap input:checked + .chk-box::after { border-color: white !important; }
             
-            .canvas-wrapper { 
-                border: 1px solid #000 !important; 
-                background: white !important; 
-                box-shadow: none !important; 
-                position: relative !important;
-            }
-            .canvas-wrapper.flex-1 { 
-                flex: 1 1 auto !important; 
-                min-height: 120px !important; 
-            }
+            .canvas-wrapper { border: 1px solid #000 !important; background: white !important; box-shadow: none !important; position: relative !important; }
+            .canvas-wrapper.flex-1 { flex: 1 1 auto !important; min-height: 120px !important; }
 
             .matrix-card { border: 1px solid #000 !important; box-shadow: none !important; background: white !important;}
             .matrix-card.selected { border-width: 2px !important; background: #eaeaea !important; }
             .matrix-chk-checked { border-color: #000 !important; background: #000 !important; color: #fff !important; }
             .matrix-check-mark:not(.hidden) { display: inline-block !important; font-weight: bold !important; color: white !important; }
 
-            .print-footer { 
-                border-top: 1px solid #000 !important; 
-                color: black !important; 
-                margin-top: auto !important; 
-                padding-top: 5px !important;
-            }
+            .print-footer { border-top: 1px solid #000 !important; color: black !important; margin-top: auto !important; padding-top: 5px !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Schermata Iniziale -->
     <div id="view-action" class="view-screen">
         <div class="flex flex-col items-center w-full max-w-5xl mx-auto px-4">
-            <h1 class="brand-title">MAKE IT MATTER</h1>
-            <p class="brand-subtitle">Protocollo Zener Quantico &middot; Adattamento SRI</p>
+            <h1 class="brand-title">FAI LA DIFFERENZA</h1>
+            <p class="brand-subtitle">Protocollo Zener Quantistico &middot; Adattamento SRI</p>
             
             <div class="zener-display" id="zener-landing-display"></div>
             
@@ -400,64 +396,64 @@
                     <div class="action-icon">
                         <svg class="w-10 h-10 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     </div>
-                    <h3 class="action-title">Stampa Modulo Vuoto</h3>
-                    <p class="action-desc">Genera un PDF A4 pulito e non formattato per l'archiviazione fisica e la registrazione manuale della sessione.</p>
+                    <h3 class="action-title">Stampa Moduli e Carte</h3>
+                    <p class="action-desc">Genera registri fisici e carte Zener da ritagliare per una configurazione di laboratorio a 2 persone (Mittente/Ricevente).</p>
                 </button>
 
                 <button class="action-card group" onclick="executeAction('start')">
                     <div class="action-icon">
                         <svg class="w-10 h-10 opacity-80 group-hover:opacity-100 transition-opacity text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="action-title">Inizia Protocollo</h3>
-                    <p class="action-desc">Genera un target bloccato crittograficamente. Avvia l'interfaccia digitale della sessione con audio Hemi-Sync.</p>
+                    <h3 class="action-title">Avvia Protocollo Digitale</h3>
+                    <p class="action-desc">Avvia l'interfaccia per la sessione singola. Genera un bersaglio crittografato e la sincronizzazione audio binaurale.</p>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Applicazione Principale -->
     <div id="app-container">
-        <!-- Pannello di Controllo Intuitivo (Scompare in stampa) -->
+        <!-- Intuitive Control Panel (Hidden on print) -->
         <div id="toolbar">
             <div class="flex items-center gap-1 md:gap-2">
-                <button class="btn-tool has-tooltip text-slate-300 hover:text-white" onclick="goBackToHome()" data-tooltip="Esci e Torna alla Home: Clicca qui per fermare tutto e tornare alla schermata principale.">
+                <button class="btn-tool has-tooltip text-slate-300 hover:text-white" onclick="goBackToHome()" data-tooltip="Esci alla Home: Interrompi la sessione e torna al menu.">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 </button>
-                <button class="btn-tool has-tooltip text-slate-300 hover:text-white" onclick="openModal('manual')" data-tooltip="Istruzioni: Leggi come funziona l'applicazione.">
+                <button class="btn-tool has-tooltip text-slate-300 hover:text-white" onclick="openModal('manual')" data-tooltip="Manuale del Protocollo: Visualizza le istruzioni per la pratica singola/in coppia.">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </button>
                 <div class="h-6 w-px bg-slate-700 mx-1 md:mx-2"></div>
             </div>
 
             <div class="flex items-center bg-slate-800/80 rounded-lg p-1 border border-slate-700 shadow-inner">
-                <div class="has-tooltip flex items-center" data-tooltip="Scegli Frequenza: Seleziona il suono speciale che aiuterà il tuo cervello a rilassarsi e concentrarsi sul bersaglio.">
+                <div class="has-tooltip flex items-center" data-tooltip="Sincronizzazione Neurale: Seleziona la frequenza binaurale bersaglio.">
                     <svg class="w-4 h-4 text-slate-400 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
-                    <select id="audio-preset" class="bg-transparent text-white font-mono text-xs md:text-sm px-2 py-1 outline-none cursor-pointer w-[110px] md:w-auto">
-                        <optgroup label="Frequenze Base">
+                    <select id="audio-preset" class="bg-transparent text-white font-mono text-xs md:text-sm px-2 py-1 outline-none cursor-pointer w-[120px] md:w-auto">
+                        <optgroup label="Frequenze di Base">
                             <option value="delta">Delta (Sonno Profondo)</option>
-                            <option value="theta">Theta (Rilassamento)</option>
+                            <option value="theta" selected>Theta (Rilassamento)</option>
                             <option value="alpha">Alpha (Concentrazione)</option>
-                            <option value="beta">Beta (Veglia)</option>
+                            <option value="beta">Beta (Sveglio)</option>
                             <option value="gamma">Gamma (Alta Energia)</option>
                         </optgroup>
                         <optgroup label="Pilota Automatico">
                             <option value="f10">Focus 10 (Corpo Addormentato)</option>
                             <option value="f12">Focus 12 (Mente Espansa)</option>
                             <option value="f15">Focus 15 (Vuoto Totale)</option>
+                            <option value="f21">Focus 21 (Ponte / Confine)</option>
                         </optgroup>
                     </select>
                 </div>
                 
-                <button id="btn-play-audio" class="btn-tool text-green-400 hover:text-green-300 hover:bg-green-400/10 has-tooltip mx-1" onclick="playSelectedAudio()" data-tooltip="Inizia Suono: Clicca questo pulsante Play per far partire il suono Binaurale nelle cuffie.">
+                <button id="btn-play-audio" class="btn-tool text-green-400 hover:text-green-300 hover:bg-green-400/10 has-tooltip mx-1" onclick="playSelectedAudio()" data-tooltip="Inizializza Sincronizzazione: Avvia l'audio binaurale.">
                     <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
                 </button>
-                <button class="btn-tool text-slate-400 hover:text-white has-tooltip mr-1" onclick="stopAudio()" data-tooltip="Ferma Suono: Spegni tutti i suoni.">
+                <button class="btn-tool text-slate-400 hover:text-white has-tooltip mr-1" onclick="stopAudio()" data-tooltip="Interrompi Audio: Ferma tutta la sintesi.">
                     <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd"></path></svg>
                 </button>
                 
                 <div class="h-5 w-px bg-slate-600 mx-1"></div>
                 
-                <button id="btn-waves" class="btn-tool text-blue-300 hover:text-blue-200 hover:bg-blue-400/10 has-tooltip text-lg" onclick="toggleWaves()" data-tooltip="Onde del Mare: Clicca per far partire un suono di mare che copre i rumori fastidiosi intorno a te.">
+                <button id="btn-waves" class="btn-tool text-blue-300 hover:text-blue-200 hover:bg-blue-400/10 has-tooltip text-lg" onclick="toggleWaves()" data-tooltip="Maschera Acustica: Attiva/disattiva il rumore delle onde dell'oceano per isolare l'ambiente.">
                     🌊
                 </button>
                 <span id="audio-status-indicator" class="w-2.5 h-2.5 rounded-full bg-slate-600 ml-2 mr-2 shadow-inner border border-slate-900 transition-colors duration-300"></span>
@@ -466,18 +462,18 @@
             <div class="flex items-center gap-1 md:gap-2 ml-auto md:ml-0">
                 <div class="flex items-center bg-slate-800/80 rounded-lg p-1 border border-slate-700">
                     <span id="timer-display" class="font-mono font-bold text-slate-300 px-2 text-xs md:text-sm w-12 text-center">00:00</span>
-                    <button id="timer-btn" class="btn-tool text-slate-300 hover:text-white has-tooltip" onclick="toggleTimer()" data-tooltip="Cronometro: Clicca per iniziare a contare il tempo. Clicca di nuovo per tornare a zero.">
+                    <button id="timer-btn" class="btn-tool text-slate-300 hover:text-white has-tooltip" onclick="toggleTimer()" data-tooltip="Orologio della Sessione: Avvia/Ferma il conteggio del tempo.">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </button>
                 </div>
 
                 <div class="h-6 w-px bg-slate-700 mx-1 mobile-hide"></div>
 
-                <button class="btn-tool text-red-400 hover:text-red-300 hover:bg-red-900/30 has-tooltip mobile-hide" onclick="clearData(true)" data-tooltip="Cancella Tutto: Cestina i disegni e le parole, pronto per cominciare da capo.">
+                <button class="btn-tool text-red-400 hover:text-red-300 hover:bg-red-900/30 has-tooltip mobile-hide" onclick="clearData(true)" data-tooltip="Svuota Memoria: Cancella i disegni e i dati della sessione corrente.">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 </button>
 
-                <button class="btn-tool bg-white text-slate-900 hover:bg-slate-200 has-tooltip ml-1 px-3" onclick="window.print()" data-tooltip="Stampa Documento: Trasforma tutto il tuo lavoro in un documento PDF pulito e senza barra dei menu.">
+                <button class="btn-tool bg-white text-slate-900 hover:bg-slate-200 has-tooltip ml-1 px-3" onclick="window.print()" data-tooltip="Esporta PDF: Salva la sessione in PDF o stampa su carta.">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     <span class="font-bold text-xs hidden md:inline ml-1 font-mono">STAMPA</span>
                 </button>
@@ -485,25 +481,24 @@
         </div>
 
         <main class="w-full">
-            <!-- Pagina 1: Log di Avvio -->
             <div class="a4-page">
                 <div class="page-content flex flex-col h-full">
                     <header class="flex justify-between items-end border-b-2 border-slate-800 pb-2 mb-6 shrink-0">
                         <div>
-                            <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1">Impostazione Sessione e Parametri Vettoriali</div>
-                            <h1 class="doc-title">Log Protocollo Quantico</h1>
+                            <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1">Impostazione Sessione & Parametri Vettoriali</div>
+                            <h1 class="doc-title">Registro Protocollo Quantistico</h1>
                         </div>
-                        <div class="text-right text-xs text-slate-500 mt-1 font-mono">PAGINA 1 / 5</div>
+                        <div class="text-right text-xs text-slate-500 mt-1 font-mono">PAGINA 1 / 6</div>
                     </header>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 shrink-0">
                         <div class="input-group">
-                            <span class="input-label">Numero di Riferimento Target (TRN)</span>
+                            <span class="input-label">Numero di Riferimento Bersaglio (TRN)</span>
                             <input type="text" id="f_trn" placeholder="IN ATTESA DI INIZIALIZZAZIONE" readonly>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="input-group"><span class="input-label">Inizio T (Zulu)</span><input type="text" id="f_start" placeholder="00:00"></div>
-                            <div class="input-group"><span class="input-label">Fine T (Zulu)</span><input type="text" id="f_end" placeholder="00:00"></div>
+                            <div class="input-group"><span class="input-label">T-Inizio (Zulu)</span><input type="text" id="f_start" placeholder="00:00"></div>
+                            <div class="input-group"><span class="input-label">T-Fine (Zulu)</span><input type="text" id="f_end" placeholder="00:00"></div>
                         </div>
                     </div>
 
@@ -513,8 +508,8 @@
                         <div>
                             <span class="input-label">Postura Fisica</span>
                             <div class="flex flex-wrap gap-5 mt-2 items-center">
-                                <label class="chk-wrap"><input type="checkbox" id="c_pos_supine"><span class="chk-box"></span><span class="chk-title">Supino</span></label>
-                                <label class="chk-wrap"><input type="checkbox" id="c_pos_seated"><span class="chk-box"></span><span class="chk-title">Seduto</span></label>
+                                <label class="chk-wrap"><input type="checkbox" id="c_pos_supine"><span class="chk-box"></span><span class="chk-title">Supina</span></label>
+                                <label class="chk-wrap"><input type="checkbox" id="c_pos_seated"><span class="chk-box"></span><span class="chk-title">Seduta</span></label>
                                 <div class="flex-1 min-w-[150px]"><input type="text" id="f_pos_other" placeholder="Altra Configurazione..."></div>
                             </div>
                         </div>
@@ -538,23 +533,23 @@
                         <label class="chk-wrap"><input type="checkbox" id="c_freq_gamma"><span class="chk-box"></span><span class="chk-title">GAMMA</span></label>
                     </div>
 
-                    <h2 class="section-header shrink-0">Vettore Target (Livello Focus Monroe)</h2>
+                    <h2 class="section-header shrink-0">Vettore Bersaglio (Livello Focus Monroe)</h2>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 shrink-0">
                         <label class="chk-wrap border border-slate-200 rounded p-3 hover:bg-slate-50 transition-colors">
                             <input type="checkbox" id="c_f10"><span class="chk-box mt-0.5"></span>
-                            <div class="flex flex-col ml-1"><span class="chk-title">Focus 10</span><span class="chk-desc">Mente Sveglia, Corpo Addormentato</span></div>
+                            <div class="flex flex-col ml-1"><span class="chk-title">Focus 10</span><span class="chk-desc">Mente Sveglia, Corpo Addormentato (Alpha/Theta)</span></div>
                         </label>
                         <label class="chk-wrap border border-slate-200 rounded p-3 hover:bg-slate-50 transition-colors">
                             <input type="checkbox" id="c_f12"><span class="chk-box mt-0.5"></span>
-                            <div class="flex flex-col ml-1"><span class="chk-title">Focus 12</span><span class="chk-desc">Consapevolezza Espansa</span></div>
+                            <div class="flex flex-col ml-1"><span class="chk-title">Focus 12</span><span class="chk-desc">Consapevolezza Espansa (Theta)</span></div>
                         </label>
                         <label class="chk-wrap border border-slate-200 rounded p-3 hover:bg-slate-50 transition-colors">
                             <input type="checkbox" id="c_f15"><span class="chk-box mt-0.5"></span>
-                            <div class="flex flex-col ml-1"><span class="chk-title">Focus 15</span><span class="chk-desc">Stato di Vuoto / Senza Tempo</span></div>
+                            <div class="flex flex-col ml-1"><span class="chk-title">Focus 15</span><span class="chk-desc">Stato di Vuoto / Senza Tempo (Theta Profondo)</span></div>
                         </label>
                         <label class="chk-wrap border border-slate-200 rounded p-3 hover:bg-slate-50 transition-colors">
                             <input type="checkbox" id="c_f21"><span class="chk-box mt-0.5"></span>
-                            <div class="flex flex-col ml-1"><span class="chk-title">Focus 21</span><span class="chk-desc">Ponte / Confine</span></div>
+                            <div class="flex flex-col ml-1"><span class="chk-title">Focus 21</span><span class="chk-desc">Ponte / Confine (Delta)</span></div>
                         </label>
                     </div>
 
@@ -564,36 +559,35 @@
                             <label class="chk-wrap text-red-900"><input type="checkbox" id="c_click_no" onclick="uncheckGroup('click', this)"><span class="chk-box border-red-400"></span><span class="chk-title uppercase tracking-wide">NEGATIVO</span></label>
                             <label class="chk-wrap text-red-900"><input type="checkbox" id="c_click_yes" onclick="uncheckGroup('click', this)"><span class="chk-box border-red-400"></span><span class="chk-title uppercase tracking-wide">POSITIVO</span></label>
                             <div class="flex items-center gap-3 text-sm font-mono w-full sm:w-auto text-red-900">
-                                <span>INIZIO STIM:</span> <input type="text" id="f_click_s" class="w-16 border-none border-b-2 border-red-300 bg-transparent text-center p-0 h-6" placeholder="--:--">
-                                <span>FINE STIM:</span> <input type="text" id="f_click_e" class="w-16 border-none border-b-2 border-red-300 bg-transparent text-center p-0 h-6" placeholder="--:--">
+                                <span>INIZIO STIMATO:</span> <input type="text" id="f_click_s" class="w-16 border-none border-b-2 border-red-300 bg-transparent text-center p-0 h-6" placeholder="--:--">
+                                <span>FINE STIMATA:</span> <input type="text" id="f_click_e" class="w-16 border-none border-b-2 border-red-300 bg-transparent text-center p-0 h-6" placeholder="--:--">
                             </div>
                         </div>
                     </div>
                 </div> 
                 <div class="print-footer">
-                    <span>Log di Inizializzazione Sessione</span><span>MODULO-QCS-01</span>
+                    <span>Registro Inizializzazione Sessione</span><span>FORM-QCS-01</span>
                 </div>
             </div>
 
-            <!-- Pagina 2: Canvas e Percezioni -->
             <div class="a4-page">
                 <div class="page-content flex flex-col h-full">
                     <header class="flex justify-between items-end border-b-2 border-slate-800 pb-2 mb-4 shrink-0">
                         <div>
-                            <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1">Fase di Acquisizione Dati Non-Locale</div>
-                            <h1 class="doc-title">Mappa di Visione Remota</h1>
+                            <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1">Fase di Acquisizione Dati Non Locale</div>
+                            <h1 class="doc-title">Mappa Visione Remota</h1>
                         </div>
-                        <div class="text-right text-xs text-slate-500 mt-1 font-mono">PAGINA 2 / 5</div>
+                        <div class="text-right text-xs text-slate-500 mt-1 font-mono">PAGINA 2 / 6</div>
                     </header>
 
                     <h2 class="section-header shrink-0">Fase 1: Ideogramma / Gestalt</h2>
                     <div class="canvas-wrapper flex-1 min-h-[120px] mb-4 shrink-0">
-                        <div class="absolute top-2 left-2 text-[9px] font-mono text-slate-400 pointer-events-none tracking-widest">SCHIZZO INIZIALE / LINEE DI ENERGIA</div>
+                        <div class="absolute top-2 left-2 text-[9px] font-mono text-slate-400 pointer-events-none tracking-widest">BOZZETTO INIZIALE / LINEE DI ENERGIA</div>
                         <div class="canvas-tools">
                             <button class="tool-btn active" onclick="setTool('canvas-gestalt', 'pen', this)">PENNA</button>
                             <button class="tool-btn" onclick="setTool('canvas-gestalt', 'eraser', this)">GOMMA</button>
                             <button class="tool-btn" onclick="undoCanvas('canvas-gestalt')">ANNULLA</button>
-                            <button class="tool-btn text-red-600" onclick="clearCanvas('canvas-gestalt', true)">PULISCI</button>
+                            <button class="tool-btn text-red-600" onclick="clearCanvas('canvas-gestalt', true)">CANC</button>
                         </div>
                         <canvas id="canvas-gestalt" class="drawing-board h-full w-full"></canvas>
                     </div>
@@ -602,131 +596,128 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 shrink-0">
                         <div class="input-group"><span class="input-label">VISIVI (Luminescenza, Colori, Geometria)</span><textarea id="t_visuals" class="h-16 w-full"></textarea></div>
                         <div class="input-group"><span class="input-label">UDITIVI (Acustica, Risonanza)</span><textarea id="t_auditory" class="h-16 w-full"></textarea></div>
-                        <div class="input-group"><span class="input-label">TATTILI/TERMICI (Texture, Gradienti)</span><textarea id="t_tactile" class="h-16 w-full"></textarea></div>
+                        <div class="input-group"><span class="input-label">TATTILI/TERMICI (Consistenze, Gradienti)</span><textarea id="t_tactile" class="h-16 w-full"></textarea></div>
                         <div class="input-group"><span class="input-label">OLFATTIVI/GUSTATIVI (Chimica)</span><textarea id="t_olfactory" class="h-16 w-full"></textarea></div>
                     </div>
 
-                    <h2 class="section-header shrink-0">Fase 3: Schizzo Analitico</h2>
+                    <h2 class="section-header shrink-0">Fase 3: Bozzetto Analitico</h2>
                     <div class="canvas-wrapper flex-1 min-h-[150px]">
                         <div class="absolute top-2 left-2 text-[9px] font-mono text-slate-400 pointer-events-none tracking-widest">MAPPATURA DIMENSIONALE</div>
                         <div class="canvas-tools">
                             <button class="tool-btn active" onclick="setTool('canvas-analytical', 'pen', this)">PENNA</button>
                             <button class="tool-btn" onclick="setTool('canvas-analytical', 'eraser', this)">GOMMA</button>
                             <button class="tool-btn" onclick="undoCanvas('canvas-analytical')">ANNULLA</button>
-                            <button class="tool-btn text-red-600" onclick="clearCanvas('canvas-analytical', true)">PULISCI</button>
+                            <button class="tool-btn text-red-600" onclick="clearCanvas('canvas-analytical', true)">CANC</button>
                         </div>
                         <canvas id="canvas-analytical" class="drawing-board h-full w-full"></canvas>
                     </div>
                 </div> 
 
                 <div class="print-footer">
-                    <span>Log di Visione Remota</span><span>MODULO-QCS-02</span>
+                    <span>Registro Visione Remota</span><span>FORM-QCS-02</span>
                 </div>
             </div>
 
-            <!-- Pagina 3: Rivelazione -->
             <div class="a4-page">
                 <div class="page-content flex flex-col h-full">
                     <header class="flex justify-between items-end border-b-2 border-slate-800 pb-2 mb-6 shrink-0">
                         <div>
-                            <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1">Termine Sessione e Blocco Dati</div>
-                            <h1 class="doc-title">Risoluzione del Target</h1>
+                            <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1">Termine Sessione & Blocco Dati</div>
+                            <h1 class="doc-title">Risoluzione Bersaglio</h1>
                         </div>
-                        <div class="text-right text-xs text-slate-500 font-mono mt-1">PAGINA 3 / 5</div>
+                        <div class="text-right text-xs text-slate-500 font-mono mt-1">PAGINA 3 / 6</div>
                     </header>
 
-                    <h2 class="section-header shrink-0">Fase 4: Chiamata Finale del Percettore e Rivelazione</h2>
-                    <p class="text-sm text-slate-600 mb-6 shrink-0">Rivedi i dati analitici delle Fasi 2 e 3. Impegnati in un'impressione percettiva finale (scelta del simbolo) prima di eseguire la decriptazione del target.</p>
+                    <h2 class="section-header shrink-0">Fase 4: Chiamata Finale Ricevente & Rivelazione</h2>
+                    <p class="text-sm text-slate-600 mb-6 shrink-0">Rivedi i dati analitici delle Fasi 2 e 3. Impegnati in un'impressione percettiva finale (scelta del simbolo) prima di eseguire la decrittografia del bersaglio.</p>
                     
                     <div class="mb-8 shrink-0 bg-slate-50 border border-slate-200 p-6 rounded-lg">
-                        <span class="input-label mb-4 text-slate-800">1. Conferma l'Impressione Percettiva</span>
+                        <span class="input-label mb-4 text-slate-800">1. Conferma Impressione Percettiva</span>
                         <div class="flex flex-wrap gap-4 justify-center md:justify-start" id="guess-selection-area"></div>
                     </div>
 
                     <div class="border border-slate-300 rounded-lg p-6 md:p-8 shadow-sm mb-6 relative overflow-hidden shrink-0">
-                        <span class="input-label mb-4 text-slate-800">2. Esegui Decriptazione Target</span>
+                        <span class="input-label mb-4 text-slate-800">2. Esegui Decrittografia Bersaglio</span>
                         <div class="flex flex-col md:flex-row items-center gap-6">
-                            <button class="btn btn-primary py-4 px-6 text-base md:text-lg w-full md:w-auto font-sans font-bold rounded" style="height: auto;" onclick="revealTarget()">DECRIPTA TARGET</button>
+                            <button class="btn btn-primary py-4 px-8 text-lg w-full md:w-1/3 font-sans font-bold rounded bg-blue-600 text-white hover:bg-blue-700 transition-colors" style="height: auto;" onclick="revealTarget()">DECRIPTA BERSAGLIO</button>
                             
                             <div class="flex-1 flex flex-row items-center justify-between bg-slate-50 border border-slate-200 rounded p-4 w-full h-full">
-                                <div class="font-mono font-bold text-slate-500 text-xs md:text-sm mr-4 uppercase tracking-widest">Verità di Base (Target):</div>
+                                <div class="font-mono font-bold text-slate-500 text-sm mr-4 uppercase tracking-widest">Verità di Base:</div>
                                 <div id="target-reveal-display" class="w-20 h-28 border-2 border-dashed border-slate-300 rounded flex justify-center items-center bg-white text-slate-300 transition-all duration-500">
                                     <span class="text-4xl font-serif">?</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <div id="resolution-result" class="mt-8 text-center text-lg md:text-2xl font-bold font-mono min-h-[40px] uppercase tracking-wider"></div>
+                        <div id="resolution-result" class="mt-8 text-center text-xl md:text-2xl font-bold font-mono min-h-[40px] uppercase tracking-wider"></div>
                     </div>
                     
                     <div class="flex-1 flex flex-col mt-4">
                         <h2 class="section-header shrink-0">Note di Valutazione Post-Sessione</h2>
-                        <textarea id="t_post_notes" class="flex-1 w-full min-h-[100px]" placeholder="Registra qui risonanze fisiche, rumore mentale o riflessioni di sovrapposizione analitica (AOL)..."></textarea>
+                        <textarea id="t_post_notes" class="flex-1 w-full min-h-[100px]" placeholder="Registra qui la risonanza fisica, il rumore mentale o le riflessioni di sovrapposizione analitica (AOL)..."></textarea>
                     </div>
                 </div> 
 
                 <div class="print-footer">
-                    <span>Log di Risoluzione</span><span>MODULO-QCS-03</span>
+                    <span>Registro Risoluzione</span><span>FORM-QCS-03</span>
                 </div>
             </div>
 
-            <!-- Pagina 4: Blind Protocol -->
             <div class="a4-page">
                 <div class="page-content flex flex-col h-full">
                     <header class="flex justify-between items-end border-b-2 border-slate-800 pb-2 mb-8 shrink-0">
                         <div>
                             <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1">Protocollo di Verifica di Sistema</div>
-                            <h1 class="doc-title text-slate-800">Autenticazione Target in Cieco</h1>
+                            <h1 class="doc-title text-slate-800">Autenticazione Cieca del Bersaglio</h1>
                         </div>
-                        <div class="text-right text-xs text-slate-500 mt-1 font-mono">PAGINA 4 / 5</div>
+                        <div class="text-right text-xs text-slate-500 mt-1 font-mono">PAGINA 4 / 6</div>
                     </header>
 
                     <div class="bg-blue-50 border border-blue-200 rounded p-6 mb-8 text-sm text-slate-800 leading-relaxed shrink-0 shadow-sm">
-                        <p class="font-mono text-xs uppercase tracking-widest font-bold mb-2 text-blue-900">Protocollo in Cieco Rigoroso Applicato</p>
-                        <p>Questo modulo fornisce la prova verificabile che il target della sessione è stato stabilito e bloccato in memoria prima dell'inizializzazione della fase di Remote Viewing. I dati del target sono legati crittograficamente al TRN (Numero di Riferimento Target) della Sessione al tempo T-0. L'operatore può decriptare manualmente il target bloccato qui sotto per autenticare che il sistema non abbia alterato dinamicamente la verità di base post-sessione.</p>
+                        <p class="font-mono text-xs uppercase tracking-widest font-bold mb-2 text-blue-900">Protocollo Cieco Rigoroso Applicato</p>
+                        <p>Questo modulo fornisce una prova verificabile che il bersaglio della sessione è stato stabilito e bloccato in memoria prima dell'inizializzazione della fase di Visione Remota. I dati del bersaglio sono legati crittograficamente al TRN (Numero di Riferimento Bersaglio) della Sessione a T-0. L'operatore può decrittare manualmente il bersaglio bloccato qui sotto per autenticare che il sistema non abbia alterato dinamicamente la verità di base post-sessione.</p>
                     </div>
 
                     <div class="flex flex-col items-center justify-center flex-1">
-                        <div class="text-xs font-bold font-mono text-slate-500 tracking-widest uppercase mb-2">Codice TRN della Sessione</div>
-                        <div id="verify-trn" class="text-3xl md:text-4xl font-mono font-bold text-blue-900 tracking-[0.25em] bg-white py-4 px-8 rounded border border-slate-300 shadow-inner mb-12 text-center w-full md:w-auto overflow-hidden">
+                        <div class="text-xs font-bold font-mono text-slate-500 tracking-widest uppercase mb-2">Codice TRN Sessione</div>
+                        <div id="verify-trn" class="text-3xl md:text-4xl font-mono font-bold text-blue-900 tracking-[0.25em] bg-white py-4 px-8 rounded border border-slate-300 shadow-inner mb-12">
                             XXXX-XXXX
                         </div>
 
-                        <button id="btn-verify-early" class="action-card w-full max-w-sm group relative overflow-hidden border-2 border-dashed border-slate-300" onclick="revealVerificationEarly()">
+                        <button id="btn-verify-early" class="action-card w-full max-w-sm group relative overflow-hidden border-2 border-dashed border-slate-300 bg-white" onclick="revealVerificationEarly()">
                             <div id="verify-display" class="flex flex-col items-center relative z-10">
                                 <svg class="w-10 h-10 text-slate-400 mb-4 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                                <span class="font-bold font-mono text-xs md:text-sm text-slate-800 uppercase tracking-widest text-center">Autentica Target TRN Originale</span>
-                                <span class="text-[10px] text-red-600 mt-2 font-mono uppercase tracking-wider font-bold">Attenzione: Invalida la sessione attiva</span>
+                                <span class="font-bold font-mono text-sm text-slate-800 uppercase tracking-widest">Autentica Bersaglio TRN Originale</span>
+                                <span class="text-[10px] text-red-600 mt-2 font-mono uppercase tracking-wider font-bold">Attenzione: Rovina la sessione attiva</span>
                             </div>
                         </button>
                     </div>
                 </div> 
 
                 <div class="print-footer">
-                    <span>Log di Autenticazione</span><span>MODULO-QCS-04</span>
+                    <span>Registro Autenticazione</span><span>FORM-QCS-04</span>
                 </div>
             </div>
 
-            <!-- Pagina 5: Matrice Anomalous Cognition -->
             <div class="a4-page">
                 <div class="page-content flex flex-col h-full">
                     <header class="flex justify-between items-end border-b-2 border-slate-800 pb-2 mb-6 shrink-0">
                         <div>
                             <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1">Matrice di Verifica in Doppio Cieco</div>
-                            <h1 class="doc-title text-slate-800">Matrice di Cognizione Anomala (AC)</h1>
+                            <h1 class="doc-title text-slate-800">Matrice Cognizione Anomala</h1>
                         </div>
-                        <div class="text-right text-xs text-slate-500 mt-1 font-mono">PAGINA 5 / 5</div>
+                        <div class="text-right text-xs text-slate-500 mt-1 font-mono">PAGINA 5 / 6</div>
                     </header>
 
                     <div class="bg-slate-50 border border-slate-200 rounded p-5 mb-8 text-sm text-slate-700 leading-relaxed print:bg-transparent print:border-none print:p-0 shrink-0">
                         <p class="font-mono text-xs uppercase tracking-widest font-bold mb-2">Protocollo di Valutazione</p>
-                        <p>In conformità con i quadri standard della parapsicologia di laboratorio (es. SRI, Rhine), la verifica del target confronta la <em>Chiamata del Percettore (Impressione Percettiva)</em> stabilita tramite cognizione anomala (attivazione ghiandola pineale) con la <em>Verità di Base del Target</em> verificata. Tocca i rispettivi simboli o caselle di controllo qui sotto per registrare i dati di correlazione digitalmente, o usa l'inchiostro per la valutazione su copie cartacee.</p>
+                        <p>In conformità con i framework dei laboratori di parapsicologia standard (es. SRI, Rhine), la verifica del bersaglio confronta la <em>Chiamata del Ricevente (Impressione Percettiva)</em> stabilita tramite cognizione anomala con la <em>Verità di Base del Bersaglio</em> verificata. Tocca i rispettivi simboli o caselle di controllo qui sotto per registrare i dati di correlazione digitalmente, oppure usa l'inchiostro se stai valutando su copie cartacee.</p>
                     </div>
 
                     <div class="mb-8 print:mb-6 shrink-0">
                         <div class="flex items-center justify-between border-b border-slate-400 pb-2 mb-4">
-                            <h2 class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-slate-900 font-mono">1. Chiamata Percettore (Impressione Percettiva)</h2>
-                            <span class="text-[8px] md:text-[9px] font-mono text-slate-500 uppercase tracking-widest text-right ml-2">Dati di Cognizione Anomala</span>
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 font-mono">1. Chiamata Ricevente (Impressione Percettiva)</h2>
+                            <span class="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Dati Cognizione Anomala</span>
                         </div>
                         <div class="flex flex-wrap gap-4 justify-around" id="matrix-row-perceived">
                             <!-- Injected interactively via JS -->
@@ -735,29 +726,32 @@
 
                     <div class="mb-8 print:mb-6 shrink-0">
                         <div class="flex items-center justify-between border-b border-slate-400 pb-2 mb-4">
-                            <h2 class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-slate-900 font-mono">2. Verità di Base del Target</h2>
-                            <span class="text-[8px] md:text-[9px] font-mono text-slate-500 uppercase tracking-widest text-right ml-2">Chiave Decriptata dal Sistema</span>
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 font-mono">2. Verità di Base del Bersaglio</h2>
+                            <span class="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Chiave Decriptata dal Sistema</span>
                         </div>
                         <div class="flex flex-wrap gap-4 justify-around" id="matrix-row-actual">
                             <!-- Injected interactively via JS -->
                         </div>
                     </div>
 
-                    <div class="mt-auto p-4 border-2 border-slate-800 rounded bg-slate-50 flex flex-wrap justify-between items-center text-xs font-mono text-slate-600 shrink-0 print:border-solid gap-2">
+                    <div class="mt-auto p-4 border-2 border-slate-800 rounded bg-slate-50 flex flex-wrap justify-between items-center text-xs font-mono text-slate-600 shrink-0 print:border-solid">
                         <div>STATO CORRELAZIONE: <span id="matrix-status-text" class="font-bold text-slate-800">IN ATTESA DI VALUTAZIONE</span></div>
                         <div class="font-bold">METODO: SCELTA FORZATA IN DOPPIO CIECO</div>
                     </div>
                 </div> 
 
                 <div class="print-footer">
-                    <span>Matrice di Cognizione Anomala</span><span>MODULO-QCS-05</span>
+                    <span>Matrice Cognizione Anomala</span><span>FORM-QCS-05</span>
                 </div>
+            </div>
+            
+            <div class="a4-page print-bleed-page" id="page-cutouts">
+                <!-- Injected via JS to ensure SVG consistency, styled for full bleed grid -->
             </div>
 
         </main>
     </div>
 
-    <!-- Modali di Sistema -->
     <div id="dialog-modal" class="hidden fixed inset-0 z-[250] bg-slate-900/60 backdrop-blur-md flex justify-center items-center p-4">
         <div class="bg-white rounded shadow-2xl w-full max-w-sm overflow-hidden border border-slate-300">
             <div class="bg-slate-50 border-b border-slate-200 p-3">
@@ -766,8 +760,8 @@
             <div class="p-6 text-center">
                 <p id="dialog-message" class="text-sm text-slate-700 mb-6 leading-relaxed font-sans">...</p>
                 <div class="flex justify-center gap-3">
-                    <button id="dialog-cancel" class="btn btn-outline border-slate-300 text-slate-600 hover:bg-slate-50 hidden w-full">ANNULLA</button>
-                    <button id="dialog-confirm" class="btn btn-primary w-full">CONFERMA</button>
+                    <button id="dialog-cancel" class="btn btn-outline border border-slate-300 text-slate-600 hover:bg-slate-50 hidden w-full py-2 rounded font-bold">ANNULLA</button>
+                    <button id="dialog-confirm" class="btn btn-primary w-full bg-blue-600 text-white hover:bg-blue-700 py-2 rounded font-bold">CONFERMA</button>
                 </div>
             </div>
         </div>
@@ -784,7 +778,7 @@
     </div>
 
     <script>
-        // --- Definizione Carte Zener ---
+        // Zener Cards Definition
         const zenerCards = {
             'circle': `<svg class="zener-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>`,
             'cross': `<svg class="zener-icon" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg>`,
@@ -800,7 +794,7 @@
         let matrixPerceived = '';
         let matrixActual = '';
 
-        // Inizializzazione Interfaccia Zener
+        // Zener Interface Initialization
         function initZenerUI() {
             const landingContainer = document.getElementById('zener-landing-display');
             const guessContainer = document.getElementById('guess-selection-area');
@@ -816,7 +810,7 @@
                 if(landingContainer) landingContainer.innerHTML += `<div class="zener-card">${svg}</div>`;
                 if(guessContainer) guessContainer.innerHTML += `<div id="guess-${key}" class="zener-card guess-card selectable" onclick="selectGuess('${key}')">${svg}</div>`;
                 
-                // Pagina 5: Carte e Caselle Interattive
+                // Page 5: Interactive Cards and Checkboxes
                 if(matrixPerceivedContainer) {
                     matrixPerceivedContainer.innerHTML += `
                         <div class="matrix-card-wrap flex flex-col items-center gap-3 cursor-pointer group" onclick="setMatrixSelection('perceived', '${key}')">
@@ -843,17 +837,59 @@
                     `;
                 }
             }
+            
+            initZenerCardsPrintPage();
         }
+        
+        function initZenerCardsPrintPage() {
+            const container = document.getElementById('page-cutouts');
+            if(!container) return;
+            container.innerHTML = '';
+            const keys = Object.keys(zenerCards);
+            
+            // We need 6 slots to fill a 2x3 grid perfectly for A4 printing.
+            // 5 Zener cards + 1 Cover/Instruction card.
+            const cardsToPrint = [...keys, 'cover'];
+
+            cardsToPrint.forEach(key => {
+                let content = '';
+                if(key === 'cover') {
+                    content = `
+                        <div class="text-center font-mono text-slate-800 flex flex-col items-center justify-center p-8">
+                            <div class="font-bold text-4xl mb-4 text-blue-900">QCS</div>
+                            <div class="text-sm tracking-widest uppercase mb-8 border-b-2 border-slate-800 pb-2">Mazzo del Mittente</div>
+                            <p class="text-xs text-slate-600 leading-relaxed text-left">
+                                ISTRUZIONI PER PROTOCOLLO A DUE PERSONE:<br><br>
+                                1. Ritaglia lungo le linee tratteggiate per separare le carte.<br>
+                                2. Mischia il mazzo fuori dalla vista del Ricevente.<br>
+                                3. Pesca un singolo bersaglio e concentra l'energia mentale sulla trasmissione della struttura del simbolo.<br>
+                                4. Attendi il registro completo della matrice del Ricevente prima di rivelare.
+                            </p>
+                        </div>`;
+                } else {
+                    // Injecting SVG and overriding classes for a massive full-card display
+                    let svg = zenerCards[key].replace('class="zener-icon"', 'class="zener-icon cutout-icon" style="width:65%; height:65%; stroke-width: 2.5; stroke: #0f172a;"');
+                    content = svg;
+                }
+
+                container.innerHTML += `
+                    <div class="cutout-card">
+                        ${content}
+                    </div>
+                `;
+            });
+        }
+        
         window.addEventListener('DOMContentLoaded', initZenerUI);
 
-        // Selezione ed interattività della Matrice
+        // Matrix Selection and Interactivity
         function setMatrixSelection(type, key) {
             if (type === 'perceived') {
                 matrixPerceived = (matrixPerceived === key) ? '' : key;
                 localStorage.setItem('qcs5_matrix_perceived', matrixPerceived);
                 updateMatrixUI('perceived', matrixPerceived);
                 
-                // Sincronizzazione con il guess di pagina 3
+                // Synchronization with page 3 guess
                 if (matrixPerceived) {
                     selectGuess(matrixPerceived, true); 
                 } else {
@@ -899,7 +935,7 @@
                 statusEl.innerText = "IN ATTESA DI VALUTAZIONE";
                 statusEl.className = "font-bold text-slate-800";
             } else if (matrixPerceived === matrixActual) {
-                statusEl.innerText = "CORRELAZIONE POSITIVA (+1.0)";
+                statusEl.innerText = "CORRELAZIONE TROVATA (+1.0)";
                 statusEl.className = "font-bold text-green-600";
             } else {
                 statusEl.innerText = "NESSUNA CORRELAZIONE (0.0)";
@@ -924,11 +960,11 @@
 
         function revealTarget() {
             if (!currentTarget) {
-                showAlert("Sistema target non inizializzato. Torna alla Home e Inizia il Protocollo.", "ERRORE DI SISTEMA");
+                showAlert("Sistema bersaglio non inizializzato. Torna alla Home e clicca su Avvia Protocollo Digitale.", "ERRORE DI SISTEMA");
                 return;
             }
             if (currentGuess === '') {
-                showAlert("Vincolo del protocollo: Conferma un'Impressione Percettiva prima di eseguire la decriptazione del target.", "VINCOLO DEL PROTOCOLLO");
+                showAlert("Vincolo di protocollo: Devi impegnarti in un simbolo di Impressione Percettiva prima di eseguire la decrittografia del bersaglio.", "VINCOLO DI PROTOCOLLO");
                 return;
             }
             
@@ -968,8 +1004,8 @@
             const verifyDisplay = document.getElementById('verify-display');
             verifyDisplay.innerHTML = `
                 <svg class="w-10 h-10 text-slate-400 mb-4 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                <span class="font-bold font-mono text-xs md:text-sm text-slate-800 uppercase tracking-widest text-center">Autentica Target TRN Originale</span>
-                <span class="text-[10px] text-red-600 mt-2 font-mono uppercase tracking-wider font-bold">Attenzione: Invalida la sessione attiva</span>
+                <span class="font-bold font-mono text-sm text-slate-800 uppercase tracking-widest">Autentica Bersaglio TRN Originale</span>
+                <span class="text-[10px] text-red-600 mt-2 font-mono uppercase tracking-wider font-bold">Attenzione: Rovina la sessione attiva</span>
             `;
             const btnVerify = document.getElementById('btn-verify-early');
             btnVerify.classList.remove('border-red-300', 'bg-red-50');
@@ -1060,10 +1096,10 @@
                 title.innerText = "MANUALE OPERATIVO";
                 body.innerHTML = `
                     <p class="mb-4 text-xs font-mono text-slate-500 tracking-wide uppercase">Procedura Operativa Standard</p>
-                    <p><strong>1. SINCRONIZZAZIONE AUDIO:</strong> Usa la barra superiore per sintetizzare i battiti binaurali. Le cuffie stereo sono obbligatorie. La modalità <em>Pilota Automatico</em> usa una rampa di frequenze: inizia ad una frequenza di veglia e guida lentamente le tue onde cerebrali fino allo stato target nel corso di alcuni minuti per evitare lo shock acustico.</p>
-                    <p><strong>2. CANVAS DIGITALE:</strong> Le aree di schizzo (Gestalt e Dimensionale) sono completamente interattive. Usa un dito o uno stilo per mappare i target. Gli schizzi sono ottimizzati per la stampa A4 ad alto contrasto.</p>
-                    <p><strong>3. AUTO-SALVATAGGIO E PERSISTENZA:</strong> Ogni tasto premuto, segno di spunta nella matrice e schizzo viene salvato continuamente nella memoria locale del dispositivo.</p>
-                    <p><strong>4. MATRICE DI COGNIZIONE ANOMALA:</strong> Tocca i simboli a Pagina 5 per registrare la Chiamata del Percettore e verificare statisticamente la correlazione del target.</p>
+                    <p class="mb-4"><strong>1. PRATICA SINGOLA:</strong> Il sistema seleziona automaticamente un bersaglio nascosto. Usa i moduli per registrare i dati sensoriali. Impegnati in una chiamata finale a Pagina 3, quindi decripta il bersaglio per verificare la tua precisione.</p>
+                    <p class="mb-4"><strong>2. DUE PERSONE (MITTENTE/RICEVENTE):</strong> Clicca su "Stampa Moduli e Carte" dalla schermata principale. Ritaglia le carte grandi nell'ultima pagina. Il Mittente si concentra su una carta fisica in un'altra stanza, mentre il Ricevente usa i moduli stampati per registrare i dati.</p>
+                    <p class="mb-4"><strong>3. SINCRONIZZAZIONE AUDIO:</strong> Usa la barra degli strumenti in alto per sintetizzare i battiti binaurali. Le cuffie stereo sono obbligatorie. La modalità <em>Pilota Automatico</em> utilizza la rampa di frequenza: inizia a una frequenza di veglia e guida lentamente le tue onde cerebrali verso lo stato bersaglio nel corso di alcuni minuti.</p>
+                    <p><strong>4. TELA DIGITALE E SALVATAGGIO AUTOMATICO:</strong> I bozzetti sono interattivi e ottimizzati per la stampa A4. Ogni sequenza di tasti viene salvata automaticamente nella memoria locale.</p>
                 `;
             }
             modal.classList.remove('hidden');
@@ -1111,7 +1147,7 @@
                 generateTarget(); 
             };
             
-            if(ask) showConfirm("Cancellare tutti i dati dalla sessione interattiva? L'azione è irreversibile.", executeClear, "PULIZIA DATI");
+            if(ask) showConfirm("Cancellare tutti i dati dalla sessione interattiva? Questa azione non può essere annullata.", executeClear, "SVUOTA DATI");
             else executeClear();
         }
 
@@ -1147,15 +1183,11 @@
             }
         }
 
-        // --- Motore Audio Binaurale ---
         let synthLeft, synthRight, waveNoise, waveFilter, stereoMerger; 
         let isAudioPlaying = false; let isWavesPlaying = false;
         
         async function initAudio() {
-            // Forza il resume del contesto audio (necessario su molti browser)
-            if (Tone.context.state !== 'running') {
-                await Tone.context.resume();
-            }
+            if (Tone.context.state !== 'running') await Tone.context.resume();
             await Tone.start();
             
             stereoMerger = new Tone.Merge().toDestination();
@@ -1174,9 +1206,7 @@
 
         async function playSelectedAudio() {
             try {
-                if (Tone.context.state !== 'running') {
-                    await Tone.context.resume();
-                }
+                if (Tone.context.state !== 'running') await Tone.context.resume();
                 await Tone.start();
                 if (!synthLeft) await initAudio();
                 
@@ -1190,6 +1220,7 @@
                     case 'f10': isAutopilot = true; targetFreq = 4; rampTime = 60; break;
                     case 'f12': isAutopilot = true; targetFreq = 2.5; rampTime = 90; break;
                     case 'f15': isAutopilot = true; targetFreq = 1.5; rampTime = 120; break;
+                    case 'f21': isAutopilot = true; targetFreq = 0.5; rampTime = 180; break;
                 }
                 
                 const baseFreq = 110; 
@@ -1198,7 +1229,7 @@
                 if (isAutopilot) {
                     synthRight.frequency.value = baseFreq + 10; 
                     synthRight.frequency.rampTo(baseFreq + targetFreq, rampTime);
-                    if(!isAudioPlaying) showAlert("Pilota Automatico Avviato. Inizio rampa di frequenza graduale verso lo stato Focus Target. Assicurati che le cuffie siano attive.", "AUTOPILOTA HEMI-SYNC");
+                    if(!isAudioPlaying) showAlert("Pilota Automatico Iniziato. Esecuzione del calo graduale di frequenza verso lo stato Focus Bersaglio. Assicurati che le cuffie siano attive.", "PILOTA AUTOMATICO HEMI-SYNC");
                 } else {
                     synthRight.frequency.value = baseFreq + diffFreq;
                 }
@@ -1211,7 +1242,7 @@
                 }
             } catch (e) { 
                 console.error(e);
-                showAlert("Per favore, fai clic su un punto qualsiasi dello schermo prima di attivare l'audio per permettere al browser di sbloccare il suono.", "Audio Bloccato"); 
+                showAlert("Fai clic ovunque sullo schermo prima di attivare l'audio per consentire al browser di sbloccare il suono.", "Audio Bloccato"); 
             }
         }
 
@@ -1228,9 +1259,7 @@
 
         async function toggleWaves() {
             try {
-                if (Tone.context.state !== 'running') {
-                    await Tone.context.resume();
-                }
+                if (Tone.context.state !== 'running') await Tone.context.resume();
                 await Tone.start();
                 if (!waveNoise) await initAudio();
                 const btnWaves = document.getElementById('btn-waves');
@@ -1244,11 +1273,10 @@
                 }
             } catch (e) { 
                 console.error(e);
-                showAlert("Fai clic su un punto qualsiasi dello schermo prima per sbloccare l'audio.", "Sistema Audio"); 
+                showAlert("Fai clic ovunque sullo schermo prima per sbloccare l'audio.", "Sistema Audio"); 
             }
         }
 
-        // --- Canvas Drawing Logic ---
         const canvasState = {}; 
         
         function resizeAllCanvases() {
@@ -1374,7 +1402,7 @@
                 saveCanvasState(canvasId);
             };
             if(!ask) executeClear();
-            else { showConfirm("Cancellare questo schizzo?", executeClear, "PULISCI SCHIZZO"); }
+            else { showConfirm("Cancellare questa matrice di bozzetti?", executeClear, "CANCELLA BOZZETTO"); }
         }
         
         function loadCanvasData(canvasId, dataUrl, addToHistory=true) {
@@ -1401,7 +1429,7 @@
                 resizeAllCanvases();
             }
             
-            // Forza uno sblocco rapido del contesto audio al primo click sulla finestra
+            // Force a quick unlock of the audio context on the first click on the window
             document.body.addEventListener('click', async () => {
                 if (Tone.context.state !== 'running') {
                     await Tone.context.resume();
